@@ -8,6 +8,7 @@ const mongodb = require("mongodb");
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
+const helmet = require("helmet");
 
 const app = express();
 
@@ -25,13 +26,12 @@ database.once('connected', () => {
     console.log('Database Connected');
 })
 
-app.use(function (req, res, next) {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self'; style-src 'self'"
-  );
-  next();
-});
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    ScriptSrc: ["'self'"],
+    styleSrc: ["'self'"]
+  }
+}));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
