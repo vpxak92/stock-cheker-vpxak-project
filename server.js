@@ -3,12 +3,35 @@ require('dotenv').config();
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
-
+const mongoose = require("mongoose");
+const mongodb = require("mongodb");
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
 
 const app = express();
+
+const uri = "mongodb+srv://xaquep:lFT6HqM3GXdZFNaV@cluster0.th28r4t.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(uri);
+
+const database = mongoose.connection
+
+database.on('error', (error) => {
+    console.log(error)
+})
+
+database.once('connected', () => {
+    console.log('Database Connected');
+})
+
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self'; style-src 'self'"
+  );
+  next();
+});
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
