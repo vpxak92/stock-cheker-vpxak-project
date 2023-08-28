@@ -28,8 +28,8 @@ database.once('connected', () => {
 
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    ScriptSrc: ["'self'"],
-    styleSrc: ["'self'"]
+    "script-src": ["'self'"],
+    "style-src": ["'self'", "'unsafe-inline'"]
   }
 }));
 

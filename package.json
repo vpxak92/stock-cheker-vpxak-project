@@ -4,14 +4,14 @@
 	"description": "InfoSec project for freeCodeCamp",
 	"scripts": {
 		"start": "node server.js",
-		"test": "mocha --timeout 10000 --ui tdd tests/2_functional-tests.js"
+		"test": "mocha --timeout 7777 --ui tdd tests/2_functional-tests.js"
 	},
 	"dependencies": {
 		"body-parser": "^1.15.2",
 		"chai": "^4.2.0",
 		"chai-http": "^4.3.0",
 		"cors": "^2.8.1",
-		"dotenv": "^8.2.0",
+		"dotenv": "^8.6.0",
 		"express": "^4.14.0",
 		"helmet": "^3.1.0",
 		"mocha": "^10.2.0",
